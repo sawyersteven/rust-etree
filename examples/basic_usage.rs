@@ -33,7 +33,7 @@ fn create_xml<P: AsRef<Path>>(path: P) -> Result<(), WriteError> {
 fn modify_xml<P: AsRef<Path>>(path_in: P, path_out: P) -> Result<(), WriteError> {
     let mut tree = ETree::parse_file(path_in)?;
     let subtree_pos = tree.find("//CHILD-A").unwrap();
-    let mut subtree = tree.subtree(subtree_pos);
+    let mut subtree = tree.subtree(subtree_pos).unwrap();
     let subtree_child_pos = subtree.find("/SUBCHILD-A").unwrap();
     if let Some(node) = subtree.node_mut(subtree_child_pos) {
         node.set_text("WEST");

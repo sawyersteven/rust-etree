@@ -244,7 +244,11 @@ impl ETree {
     }
     #[allow(dead_code)]
     /// clone a subtree rooted at the node of specified position
-    pub fn subtree(&self, pos: usize) -> ETree {
+    /// Will return None if pos is out of range
+    pub fn subtree(&self, pos: usize) -> Option<ETree> {
+        if pos >= self.data.len() {
+            return None;
+        }
         let mut tree = ETree {
             indent: self.indent.clone(),
             count: 0,
@@ -266,7 +270,7 @@ impl ETree {
             node.set_route(node.get_route().get(base_root_len..).unwrap());
             tree.data.push(node);
         }
-        tree
+        Some(tree)
     }
     #[allow(dead_code)]
     /// append sibling node before the node of specified position and return the position of sibling node
