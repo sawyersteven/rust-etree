@@ -2,9 +2,9 @@
 //!
 //! `etree` is a DOM library for XML files.
 
-mod etreenode;
 mod etree;
+mod etreenode;
 mod xpath;
 
+pub use self::etree::{ETree, WriteError, XPathIterator};
 pub use self::etreenode::ETreeNode;
-pub use self::etree::{ETree, XPathIterator};
